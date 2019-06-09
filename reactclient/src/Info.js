@@ -10,7 +10,7 @@ function Info(props){
           <div className="widget-text">{moment.duration(props.infoData.upTime).humanize()}</div>
           <h3>Processor information</h3>
           <div className="widget-text"><strong>Type:</strong> {props.infoData.cpuModel}</div>
-          <div className="widget-text"><strong>Number of Cores:</strong> {props.infoData.cpuNumCores}</div>
+          <div className="widget-text"><strong>Number of Cores:</strong> {props.infoData.numCores}</div>
           <div className="widget-text"><strong>Clock Speed:</strong> {props.infoData.cpuSpeed}</div>
         </div>
     );
