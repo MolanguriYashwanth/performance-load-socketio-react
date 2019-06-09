@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "servers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sai Yashwanth",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "farmhash": "^2.1.0",
+    "mongoose": "^5.5.13",
+    "socket.io": "^2.2.0",
+    "socket.io-redis": "^5.2.0"
+  }
+}
