@@ -27,15 +27,15 @@ function socketMain(io, socket) {
         }
     })
 
-    // socket.on('disconnect',()=>{
-    //     Machine.find({macA: macA},(err, docs)=>{
-    //         if(docs.length > 0){
-    //             // send one last emit to React
-    //             docs[0].isActive = false;
-    //             io.to('ui').emit('data',docs[0]);
-    //         }
-    //     })
-    // })
+    socket.on('disconnect',()=>{
+        Machine.find({macA: macA},(err, docs)=>{
+            if(docs.length > 0){
+                // send one last emit to React
+                docs[0].isActive = false;
+                io.to('ui').emit('data',docs[0]);
+            }
+        })
+    })
 
     // // a machine has connected, check to see if it's new.
     // // if it is, add it!
@@ -49,7 +49,7 @@ function socketMain(io, socket) {
 
     socket.on('perfData', (data) => {
         console.log("Tick...", data);
-        //io.to('ui').emit('data',data)
+        io.to('ui').emit('data',data)
     });
 }
 

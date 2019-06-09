@@ -11,19 +11,30 @@ socket.on('connect', () => {
     const nI = os.networkInterfaces();
     let macA;
     // loop through all the nI for this machine and find a non-internal one
-    for(let key in nI){
-        if(!nI[key][0].internal){
+    for (let key in nI) {
+
+        // FOR TESTING PURPOSES!!!
+        macA = Math.floor(Math.random() * 3) + 1;
+        break;
+        // FOR TESTING PURPOSES!!!
+
+        if (!nI[key][0].internal) {
+            if (nI[key][0].mac === '00:00:00:00:00:00') {
+                macA = Math.random().toString(36).substr(2, 15);
+            } else {
                 macA = nI[key][0].mac;
-                break;
+            }
+            break;
         }
     }
+
     // client auth with single key value
     socket.emit('clientAuth', '5t78yuhgirekjaht32i3')
 
-    
-    performanceData().then((allPerformanceData)=>{
+
+    performanceData().then((allPerformanceData) => {
         allPerformanceData.macA = macA
-        socket.emit('initPerfData',allPerformanceData)
+        socket.emit('initPerfData', allPerformanceData)
     });
 
     // start sending over data on interval
@@ -35,7 +46,7 @@ socket.on('connect', () => {
         })
     }, 1000);
 
-    socket.on('disconnect',()=>{
+    socket.on('disconnect', () => {
         clearInterval(perfDataInterval);
     })
 
@@ -66,7 +77,8 @@ function performanceData() {
         //  - Clock Speed
         const cpuSpeed = cpus[0].speed
         const cpuLoad = await getCpuLoad();
-        resolve({ freeMem, totalMem, usedMem, memUseage, osType, upTime, cpuModel, numCores, cpuSpeed, cpuLoad })
+        const isActive = true;
+        resolve({ freeMem, totalMem, usedMem, memUseage, osType, upTime, cpuModel, numCores, cpuSpeed, cpuLoad,isActive })
     })
 }
 
